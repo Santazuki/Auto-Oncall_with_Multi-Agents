@@ -48,7 +48,7 @@ spring:
           connections:
             tencent-cls:
               url: https://mcp-api.tencent-cloud.com
-              sse-endpoint: ${SSE_ENDPOINT}  # 完整的SSE端点路径
+              sse-endpoint: /sse/b4d3c80ff70d84c9 # 完整的SSE端点路径
 
 # 阿里云 DashScope Embedding API 配置
 dashscope:
@@ -76,7 +76,7 @@ prometheus:
 
 # CLS 云日志服务配置
 cls:
-  mock-enabled: false  # 是否启用 Mock 模式（用于测试，设为 true 返回与告警关联的模拟日志数据）
+  mock-enabled: true  # 是否启用 Mock 模式（用于测试，设为 true 返回与告警关联的模拟日志数据）
 
 logging:
   level:
