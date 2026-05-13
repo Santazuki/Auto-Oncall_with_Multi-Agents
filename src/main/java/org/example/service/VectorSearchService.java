@@ -105,4 +105,5 @@ public class VectorSearchService {
         private String metadata;
 
     }
+
 }

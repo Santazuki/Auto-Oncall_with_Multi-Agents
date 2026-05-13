@@ -244,4 +244,6 @@ public class VectorEmbeddingService {
 
         return dotProduct / (float) (Math.sqrt(norm1) * Math.sqrt(norm2));
     }
+
+
 }

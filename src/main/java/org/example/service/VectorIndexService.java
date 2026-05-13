@@ -45,6 +45,7 @@ public class VectorIndexService {
     @Value("${file.upload.path}")
     private String uploadPath;
 
+
     /**
      * 索引指定目录下的所有文件
      * 
