@@ -27,6 +27,7 @@ spring:
       chat:
         options:
           timeout: 180000  # 超时时间180秒（3分钟）
+          model: deepseek-v4-pro
       retry:
         max-attempts: 3  # 最大重试次数
         backoff:
@@ -47,15 +48,14 @@ spring:
         sse:
           connections:
             tencent-cls:
-              url: https://mcp-api.tencent-cloud.com
-              sse-endpoint: /sse/b4d3c80ff70d84c9 # 完整的SSE端点路径
+              url: http://localhost:3000
 
 # 阿里云 DashScope Embedding API 配置
 dashscope:
   api:
     key: ${DASHSCOPE_API_KEY}  # 从环境变量读取或使用默认值（用于自定义配置）
   embedding:
-    model: text-embedding-v4  # 阿里云文本向量化模型
+    model: text-embedding-v3  # 阿里云文本向量化模型
 
 # 文档分片配置
 document:
@@ -66,7 +66,7 @@ document:
 # RAG 配置
 rag:
   top-k: 3  # 检索返回的最相似文档数量
-  model: "qwen3-max"  # 大语言模型名称
+  model: "deepseek-v4-pro"  # 大语言模型名称
 
 # Prometheus 配置
 prometheus:

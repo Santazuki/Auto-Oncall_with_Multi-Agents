@@ -102,6 +102,22 @@ POST /api/ai_ops
 - `GET /milvus/health` - Milvus 健康检查
 
 
+## 🎨 效果展示
+### 基本对话功能
+![对话功能](./img_readme/chat.png "chat")
+
+### 上传文件，rag检索功能
+![上传文件与rag](./img_readme/upload_file_to_milvus.png "upload_file")
+
+### 故障排查 AIOps
+#### 🟢 无异常情况
+![aiOps](img_readme/prometheus1.png "prometheus1")
+
+#### ⚠️ 出现故障，通过 AiOps 处理
+![exception](img_readme/exception.png "exception")
+![aiOps](img_readme/prometheus2.png "prometheus2")
+![aiOps](img_readme/prometheus3.png "prometheus3")
+
 ## ⚙️ 核心配置
 
 ### application.yml
@@ -133,11 +149,41 @@ document:
     overlap: 100
 ```
 
-### 环境变量
+### 自建SSE，以使用 腾讯云MCP 服务
+#### 1. 在当前目录创建 .env 文件
+```dotenv
+DASHSCOPE_API_KEY=sk-xxx # 你的api-key
 
-```bash
-export DASHSCOPE_API_KEY=your-api-key
+TRANSPORT=sse
+TENCENTCLOUD_SECRET_ID=<YOUR_SECRET_ID>
+TENCENTCLOUD_SECRET_KEY=<YOUR_SECRET_KEY>
+PORT=3000
+TZ=Asia/Shanghai
 ```
+
+#### 2. 启动 SSE 服务
+```bash
+npx -y cls-mcp-server@latest
+```
+
+#### 3. 在 application.yml 中配置：
+```yaml
+spring:
+    # Spring AI MCP 客户端配置
+    # 如果使用mock数据，请注释这部分内容
+    mcp:
+      client:
+        enabled: true
+        name: tencent-mcp-server
+        version: 1.0.0
+        request-timeout: 60s
+        type: ASYNC
+        sse:
+          connections:
+            tencent-cls:
+              url: http://localhost:3000
+```
+
 
 
 ## 🚀 快速开始
@@ -188,3 +234,4 @@ curl -X POST http://localhost:9900/api/chat \
 # 健康检查
 curl http://localhost:9900/milvus/health
 ```
+
